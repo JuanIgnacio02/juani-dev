@@ -7,7 +7,7 @@ export function Footer() {
         <p>© {year} Juani Pérez · Mendoza, Argentina</p>
         <div className="flex items-center gap-4">
           <a
-            href="https://github.com"
+            href="https://github.com/JuanIgnacio02"
             target="_blank"
             rel="noreferrer"
             className="transition-colors hover:text-foreground"
@@ -15,7 +15,7 @@ export function Footer() {
             GitHub
           </a>
           <a
-            href="https://linkedin.com"
+            href="https://www.linkedin.com/in/juan-ignacio-p%C3%A9rez-pe%C3%B1a-769bba3ab/"
             target="_blank"
             rel="noreferrer"
             className="transition-colors hover:text-foreground"

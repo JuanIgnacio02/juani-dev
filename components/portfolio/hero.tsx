@@ -106,12 +106,20 @@ export function Hero() {
           </Button>
           <div className="ml-1 flex items-center gap-1">
             <Button asChild variant="ghost" size="icon-lg" aria-label="GitHub">
-              <a href="https://github.com" target="_blank" rel="noreferrer">
+              <a
+                href="https://github.com/JuanIgnacio02"
+                target="_blank"
+                rel="noreferrer"
+              >
                 <GithubIcon className="size-4" />
               </a>
             </Button>
             <Button asChild variant="ghost" size="icon-lg" aria-label="LinkedIn">
-              <a href="https://linkedin.com" target="_blank" rel="noreferrer">
+              <a
+                href="https://www.linkedin.com/in/juan-ignacio-p%C3%A9rez-pe%C3%B1a-769bba3ab/"
+                target="_blank"
+                rel="noreferrer"
+              >
                 <LinkedinIcon className="size-4" />
               </a>
             </Button>
