@@ -6,10 +6,10 @@ import { motion, type Variants } from "motion/react"
 const easeOut = [0.22, 1, 0.36, 1] as const
 
 const directionOffset = {
-  up: { y: 24, x: 0 },
-  down: { y: -24, x: 0 },
-  left: { x: 40, y: 0 },
-  right: { x: -40, y: 0 },
+  up: { y: 18, x: 0 },
+  down: { y: -18, x: 0 },
+  left: { x: 20, y: 0 },
+  right: { x: -20, y: 0 },
   none: { x: 0, y: 0 },
 }
 
@@ -23,7 +23,7 @@ type RevealProps = React.ComponentProps<typeof motion.div> & {
 export function Reveal({
   direction = "up",
   delay = 0,
-  duration = 0.6,
+  duration = 0.7,
   children,
   ...props
 }: RevealProps) {
@@ -66,8 +66,8 @@ export function RevealGroup({
 }
 
 const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: easeOut } },
+  hidden: { opacity: 0, y: 16 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: easeOut } },
 }
 
 export function RevealItem({

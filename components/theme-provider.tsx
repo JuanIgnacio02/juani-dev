@@ -2,6 +2,7 @@
 
 import * as React from "react"
 import { ThemeProvider as NextThemesProvider, useTheme } from "next-themes"
+import { MotionConfig } from "motion/react"
 
 function ThemeProvider({
   children,
@@ -15,8 +16,11 @@ function ThemeProvider({
       disableTransitionOnChange
       {...props}
     >
-      <ThemeHotkey />
-      {children}
+      {/* Respeta "Reducir movimiento" del SO (accesibilidad + mobile) */}
+      <MotionConfig reducedMotion="user">
+        <ThemeHotkey />
+        {children}
+      </MotionConfig>
     </NextThemesProvider>
   )
 }

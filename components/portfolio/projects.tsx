@@ -6,6 +6,7 @@ import { ArrowUpRight } from "lucide-react"
 
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import { ctaHover } from "@/components/portfolio/anim"
 
 type Project = {
   title: string
@@ -56,10 +57,13 @@ function BrowserFrame({
   href: string
 }) {
   return (
-    <a
+    <motion.a
       href={href}
       target="_blank"
       rel="noreferrer"
+      whileHover={{ y: -6, rotate: -0.6, scale: 1.005 }}
+      whileTap={{ scale: 0.995 }}
+      transition={{ type: "spring", stiffness: 220, damping: 20 }}
       className="group/frame relative block rounded-2xl outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
     >
       {/* Glow */}
@@ -67,7 +71,7 @@ function BrowserFrame({
         aria-hidden
         className="absolute -inset-4 -z-10 rounded-[2rem] bg-gradient-to-tr from-primary/15 via-primary/5 to-transparent opacity-0 blur-2xl transition-opacity duration-500 group-hover/frame:opacity-100"
       />
-      <div className="overflow-hidden rounded-2xl ring-1 ring-foreground/10 shadow-2xl shadow-black/5 transition-transform duration-500 group-hover/frame:-translate-y-1.5">
+      <div className="overflow-hidden rounded-2xl ring-1 ring-foreground/10 shadow-2xl shadow-black/5 transition-shadow duration-500 group-hover/frame:shadow-black/20">
         {/* Barra de navegador */}
         <div className="flex items-center gap-1.5 border-b border-border/60 bg-muted/60 px-4 py-2.5 backdrop-blur">
           <span className="size-2.5 rounded-full bg-red-400/80" />
@@ -88,7 +92,7 @@ function BrowserFrame({
           />
         </div>
       </div>
-    </a>
+    </motion.a>
   )
 }
 
@@ -205,10 +209,10 @@ export function Projects() {
                   transition={{ duration: 0.5 }}
                   className="mt-6"
                 >
-                  <Button asChild>
+                  <Button asChild className={`group/cta ${ctaHover}`}>
                     <a href={project.href} target="_blank" rel="noreferrer">
                       Ver sitio
-                      <ArrowUpRight />
+                      <ArrowUpRight className="transition-transform duration-200 group-hover/cta:translate-x-0.5 group-hover/cta:-translate-y-0.5" />
                     </a>
                   </Button>
                 </motion.div>

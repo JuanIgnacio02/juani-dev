@@ -1,3 +1,5 @@
+import { linkUnderline } from "@/components/portfolio/anim"
+
 export function Footer() {
   const year = new Date().getFullYear()
 
@@ -10,7 +12,7 @@ export function Footer() {
             href="https://github.com/JuanIgnacio02"
             target="_blank"
             rel="noreferrer"
-            className="transition-colors hover:text-foreground"
+            className={`${linkUnderline} transition-colors hover:text-foreground`}
           >
             GitHub
           </a>
@@ -18,13 +20,13 @@ export function Footer() {
             href="https://www.linkedin.com/in/juan-ignacio-p%C3%A9rez-pe%C3%B1a-769bba3ab/"
             target="_blank"
             rel="noreferrer"
-            className="transition-colors hover:text-foreground"
+            className={`${linkUnderline} transition-colors hover:text-foreground`}
           >
             LinkedIn
           </a>
           <a
             href="mailto:juaniperez1243@icloud.com"
-            className="transition-colors hover:text-foreground"
+            className={`${linkUnderline} transition-colors hover:text-foreground`}
           >
             Email
           </a>

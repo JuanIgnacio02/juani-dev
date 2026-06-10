@@ -1,11 +1,17 @@
 "use client"
 
 import * as React from "react"
-import { motion } from "motion/react"
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useReducedMotion,
+} from "motion/react"
 import { ArrowDown, Mail } from "lucide-react"
 
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import { ctaHover, ctaHoverSoft } from "@/components/portfolio/anim"
 
 function GithubIcon(props: React.ComponentProps<"svg">) {
   return (
@@ -35,23 +41,39 @@ const item = {
 }
 
 export function Hero() {
+  const sectionRef = React.useRef<HTMLElement>(null)
+  const reduce = useReducedMotion()
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  })
+  // Parallax muy sutil: el fondo se mueve más lento que el contenido al scrollear.
+  const glowY = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : 90])
+  const gridY = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : 45])
+  const bgFade = useTransform(scrollYProgress, [0, 1], [1, 0.2])
+
   return (
-    <section className="relative overflow-hidden">
-      {/* Glow de fondo */}
-      <div
+    <section ref={sectionRef} className="relative overflow-hidden">
+      {/* Glow de fondo (parallax + respiración lenta) */}
+      <motion.div
         aria-hidden
+        style={{ y: glowY, opacity: bgFade }}
         className="pointer-events-none absolute inset-x-0 -top-40 -z-10 flex justify-center"
       >
         <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.4, ease: "easeOut" }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1, scale: [1, 1.06, 1] }}
+          transition={{
+            opacity: { duration: 1.4, ease: "easeOut" },
+            scale: { duration: 11, repeat: Infinity, ease: "easeInOut" },
+          }}
           className="h-[36rem] w-[36rem] rounded-full bg-gradient-to-tr from-primary/25 via-primary/5 to-transparent blur-3xl"
         />
-      </div>
-      {/* Grid sutil */}
-      <div
+      </motion.div>
+      {/* Grid sutil (parallax) */}
+      <motion.div
         aria-hidden
+        style={{ y: gridY, opacity: bgFade }}
         className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(to_right,var(--border)_1px,transparent_1px),linear-gradient(to_bottom,var(--border)_1px,transparent_1px)] bg-[size:64px_64px] opacity-[0.15] [mask-image:radial-gradient(ellipse_at_top,black,transparent_70%)]"
       />
 
@@ -92,20 +114,31 @@ export function Hero() {
           variants={item}
           className="flex flex-wrap items-center gap-2 pt-2"
         >
-          <Button asChild size="lg">
+          <Button asChild size="lg" className={`group/cta ${ctaHover}`}>
             <a href="#proyectos">
               Ver proyectos
-              <ArrowDown />
+              <ArrowDown className="transition-transform duration-200 group-hover/cta:translate-y-0.5" />
             </a>
           </Button>
-          <Button asChild variant="outline" size="lg">
+          <Button
+            asChild
+            variant="outline"
+            size="lg"
+            className={`group/cta ${ctaHoverSoft}`}
+          >
             <a href="#contacto">
-              <Mail />
+              <Mail className="transition-transform duration-200 group-hover/cta:-translate-y-0.5" />
               Contactame
             </a>
           </Button>
           <div className="ml-1 flex items-center gap-1">
-            <Button asChild variant="ghost" size="icon-lg" aria-label="GitHub">
+            <Button
+              asChild
+              variant="ghost"
+              size="icon-lg"
+              aria-label="GitHub"
+              className="transition-transform duration-200 hover:scale-110"
+            >
               <a
                 href="https://github.com/JuanIgnacio02"
                 target="_blank"
@@ -114,7 +147,13 @@ export function Hero() {
                 <GithubIcon className="size-4" />
               </a>
             </Button>
-            <Button asChild variant="ghost" size="icon-lg" aria-label="LinkedIn">
+            <Button
+              asChild
+              variant="ghost"
+              size="icon-lg"
+              aria-label="LinkedIn"
+              className="transition-transform duration-200 hover:scale-110"
+            >
               <a
                 href="https://www.linkedin.com/in/juan-ignacio-p%C3%A9rez-pe%C3%B1a-769bba3ab/"
                 target="_blank"

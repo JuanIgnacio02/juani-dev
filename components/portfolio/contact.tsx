@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Reveal } from "@/components/portfolio/reveal"
+import { ctaHover, linkUnderline } from "@/components/portfolio/anim"
 
 export function Contact() {
   const [sent, setSent] = React.useState(false)
@@ -42,19 +43,19 @@ export function Contact() {
             <div className="mt-4 flex flex-col gap-2">
               <a
                 href="mailto:juaniperez1243@icloud.com"
-                className="inline-flex w-fit items-center gap-2 text-sm font-medium text-foreground hover:underline"
+                className="group/link inline-flex w-fit items-center gap-2 text-sm font-medium text-foreground"
               >
-                <Mail className="size-4" />
-                juaniperez1243@icloud.com
+                <Mail className="size-4 transition-transform duration-200 group-hover/link:-translate-y-0.5" />
+                <span className={linkUnderline}>juaniperez1243@icloud.com</span>
               </a>
               <a
                 href="https://wa.me/542604002520"
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex w-fit items-center gap-2 text-sm font-medium text-foreground hover:underline"
+                className="group/link inline-flex w-fit items-center gap-2 text-sm font-medium text-foreground"
               >
-                <Phone className="size-4" />
-                +54 260 400 2520
+                <Phone className="size-4 transition-transform duration-200 group-hover/link:-translate-y-0.5" />
+                <span className={linkUnderline}>+54 260 400 2520</span>
               </a>
             </div>
           </Reveal>
@@ -93,9 +94,13 @@ export function Contact() {
                 required
               />
             </div>
-            <Button type="submit" size="lg" className="w-fit">
+            <Button
+              type="submit"
+              size="lg"
+              className={`group/cta w-fit ${ctaHover}`}
+            >
               {sent ? "¡Gracias!" : "Enviar mensaje"}
-              <Send />
+              <Send className="transition-transform duration-200 group-hover/cta:translate-x-0.5" />
             </Button>
             </form>
           </Reveal>
