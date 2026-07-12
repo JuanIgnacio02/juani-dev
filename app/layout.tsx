@@ -1,14 +1,21 @@
 import type { Metadata } from "next"
-import { Geist, Geist_Mono } from "next/font/google"
+import { Fraunces, Geist, Geist_Mono } from "next/font/google"
 
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { cn } from "@/lib/utils";
 
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  style: ["normal", "italic"],
+  variable: "--font-serif",
+  axes: ["opsz", "SOFT", "WONK"],
+})
+
 export const metadata: Metadata = {
-  title: "Juani — Desarrollador Web",
+  title: "Juani Pérez — Desarrollador Full-Stack",
   description:
-    "Portfolio de Juani: desarrollador full-stack especializado en React, Next.js y diseño de interfaces.",
+    "Desarrollador full-stack en Mendoza, Argentina. Construyo productos web que se sienten vivos: React, Next.js, TypeScript y diseño de interfaces.",
 }
 
 const geist = Geist({subsets:['latin'],variable:'--font-sans'})
@@ -25,11 +32,19 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="es"
       suppressHydrationWarning
-      className={cn("antialiased", fontMono.variable, "font-sans", geist.variable)}
+      className={cn(
+        "antialiased",
+        fontMono.variable,
+        "font-sans",
+        geist.variable,
+        fraunces.variable
+      )}
     >
       <body>
+        {/* Grano de película, muy sutil */}
+        <div aria-hidden className="noise" />
         <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
